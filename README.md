@@ -1,6 +1,6 @@
-# PROJECT_NAME
+# Sync Performance
 
-PROJECT_DESCRIPTION
+Simple sample project to test Sync's performance.
 
 ## Running the project
 
@@ -16,17 +16,5 @@ sudo gem install cocoapods
 pod install
 ```
 
-- Open `Project.xcworkspace` or `Project.xcodeproj`
+- Open `Project.xcworkspace`
 
-## Updating generated models
-
-- Install [mogenerator](http://rentzsch.github.io/mogenerator/)
-- Run the following command in Terminal.app
-
-```
-mogenerator \
---swift \
---model Library/Models/DataModel.xcdatamodeld/DataModel.xcdatamodel \
---output-dir Library/Models \
---v2
-```
