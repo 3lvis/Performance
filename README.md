@@ -1,28 +1,32 @@
-# App Template
+# PROJECT_NAME
 
-This is a template for your iOS project. It's main purpose is to ease the creation of storyboard-less well structured apps.
+PROJECT_DESCRIPTION
 
-- [x] Removed Main.storyboard
-- [x] Moved Info.plist, Image.xcassets and LaunchScreen.xib to **Resources**
-- [x] Added iOS target, useful when you need other targets such as tvOS or watchOS.
+## Running the project
 
-The folder structure looks like this:
+- Install the [cocoapods](https://cocoapods.org) gem
 
-![folder structure](https://raw.githubusercontent.com/3lvis/resources/master/app-template/project-structure.png)
+```
+sudo gem install cocoapods
+```
 
-# Set up
+- Run the following command in Terminal.app
 
-After cloning this project there are 3 steps that you'll have to follow in order to configure this template to your needs.
+```
+pod install
+```
 
-### 1. Run `pod install`
+- Open `Project.xcworkspace` or `Project.xcodeproj`
 
-### 2. Rename Bundle Identifier
+## Updating generated models
 
-![Bundle indentifier](https://raw.githubusercontent.com/3lvis/resources/master/app-template/rename-bundle.png)
+- Install [mogenerator](http://rentzsch.github.io/mogenerator/)
+- Run the following command in Terminal.app
 
-### 3. Rename iOS Display Name
-
-![Bundle name](https://raw.githubusercontent.com/3lvis/resources/master/app-template/rename-display-name.png)
-
-### 4. Remove `README.md`, rename `app-README.md` to `README.md`
-# SyncPerformance
+```
+mogenerator \
+--swift \
+--model Library/Models/DataModel.xcdatamodeld/DataModel.xcdatamodel \
+--output-dir Library/Models \
+--v2
+```
