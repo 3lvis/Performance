@@ -1,6 +1,6 @@
 # Sync Performance
 
-Simple sample project to test Sync's performance.
+Simple sample project to test Sync's performance or loading 13 000 items including several deletes, inserts and updates.
 
 ## Running the project
 
