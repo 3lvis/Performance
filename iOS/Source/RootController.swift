@@ -3,7 +3,7 @@ import DATASource
 
 class RootController: BaseTableViewController {
     lazy var dataSource: DATASource = {
-        let request: NSFetchRequest = NSFetchRequest(entityName: "User")
+        let request = NSFetchRequest(entityName: "User")
         request.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
 
         let dataSource = DATASource(tableView: self.tableView, cellIdentifier: "Cell", fetchRequest: request, mainContext: self.fetcher.dataStack.mainContext, configuration: { cell, item, indexPath in
