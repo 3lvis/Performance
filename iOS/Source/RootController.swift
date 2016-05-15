@@ -24,11 +24,11 @@ class RootController: BaseTableViewController {
         super.viewDidAppear(animated)
 
         print("appeared")
-        self.fetcher.initialImport { error in
-            print("first batch")
+//        self.fetcher.initialImport { error in
+//            print("first batch")
             self.fetcher.bigImport { error in
                 print("second batch")
             }
-        }
+//        }
     }
 }
