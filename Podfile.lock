@@ -7,18 +7,18 @@ PODS:
   - Hex (3.0.0)
   - Networking (1.0.1)
   - NSDictionary-ANDYSafeValue (0.3.1)
-  - NSEntityDescription-SYNCPrimaryKey (1.1.0):
-    - NSString-HYPNetworking (~> 0.4.0)
-  - NSManagedObject-HYPPropertyMapper (3.6.4):
-    - NSEntityDescription-SYNCPrimaryKey (~> 1.1.0)
-    - NSString-HYPNetworking (~> 0.4.0)
-  - NSString-HYPNetworking (0.4.0)
+  - NSEntityDescription-SYNCPrimaryKey (1.1.1):
+    - NSString-HYPNetworking (~> 1.0.0)
+  - NSManagedObject-HYPPropertyMapper (3.6.5):
+    - NSEntityDescription-SYNCPrimaryKey (~> 1.1.1)
+    - NSString-HYPNetworking (~> 1.0.0)
+  - NSString-HYPNetworking (1.0.0)
   - Sync (1.7.1):
     - DATAFilter (~> 0.10.0)
     - DATAStack (~> 5.2.0)
     - NSDictionary-ANDYSafeValue (~> 0.3.1)
-    - NSEntityDescription-SYNCPrimaryKey (~> 1.1.0)
-    - NSManagedObject-HYPPropertyMapper (~> 3.6.4)
+    - NSEntityDescription-SYNCPrimaryKey (~> 1.1.1)
+    - NSManagedObject-HYPPropertyMapper (~> 3.6.5)
 
 DEPENDENCIES:
   - DATASource
@@ -32,7 +32,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Sync:
-    :commit: 7b44559aa5bcc8d5fedd762b820a2b3ee903e092
+    :commit: 82725b9b7c4f03167a99f0e7b10a63e7808db709
     :git: git@github.com:hyperoslo/Sync.git
 
 SPEC CHECKSUMS:
@@ -43,10 +43,10 @@ SPEC CHECKSUMS:
   Hex: ee430da9c4412d9196366ae5327f279021dc03eb
   Networking: 27736a1bca59b0c767a31006a76d076dd51402bc
   NSDictionary-ANDYSafeValue: 2d7adf339b6e302d71fec5f1d71ae00aacda993e
-  NSEntityDescription-SYNCPrimaryKey: 66f1b5393ee3b6c8b12700d4c86ba6e5ad2bcfe9
-  NSManagedObject-HYPPropertyMapper: 01ea4945879774201011260f6e309b1ae347b6fb
-  NSString-HYPNetworking: 24c3828eebde8a37cc16101a475934a56ac820c0
-  Sync: 532219c01f48480fe5a3bbb5ded538182fad6fc3
+  NSEntityDescription-SYNCPrimaryKey: 50badad9cf3b44c538e137e363f3204725c8589c
+  NSManagedObject-HYPPropertyMapper: c496d7a45b95fa59871711bfd3fbe52546529b37
+  NSString-HYPNetworking: 9794295fb2f632ecf33cde6e6311e77588e6f349
+  Sync: ca4c0612349734efde11f77b90716f6c45be45b8
 
 PODFILE CHECKSUM: e95027589311f407da8fdf391645154bc1acbfce
 
