@@ -1,13 +1,14 @@
 import UIKit
+import DATAStack
 
 @UIApplicationMain
 class AppDelegate: UIResponder {
     var window: UIWindow?
 
-    private lazy var fetcher: Fetcher = {
-        let fetcher = Fetcher(baseURL: "https://server.com", modelName: "DataModel")
+    lazy var dataStack: DATAStack = {
+        let dataStack = DATAStack(modelName: "DataModel")
 
-        return fetcher
+        return dataStack
     }()
 }
 
@@ -16,7 +17,9 @@ extension AppDelegate: UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         guard let window = self.window else { fatalError("Window not found") }
 
-        window.rootViewController = RootController(fetcher: self.fetcher)
+        let rootController = RootController(dataStack: self.dataStack)
+        let navigationController = UINavigationController(rootViewController: rootController)
+        window.rootViewController = navigationController        
         window.makeKeyAndVisible()
 
         return true

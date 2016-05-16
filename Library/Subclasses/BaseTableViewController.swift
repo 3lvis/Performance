@@ -1,10 +1,11 @@
 import UIKit
+import DATAStack
 
 public class BaseTableViewController: UITableViewController {
-    internal var fetcher: Fetcher
+    internal var dataStack: DATAStack
 
-    public init(fetcher: Fetcher) {
-        self.fetcher = fetcher
+    public init(dataStack: DATAStack) {
+        self.dataStack = dataStack
 
         super.init(nibName: nil, bundle: nil)
     }

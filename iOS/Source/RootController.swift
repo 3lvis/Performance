@@ -1,13 +1,17 @@
 import UIKit
 import DATASource
+import JSON
+import Sync
 
 class RootController: BaseTableViewController {
+    var operation: Sync?
+
     lazy var dataSource: DATASource = {
         let request = NSFetchRequest(entityName: "User")
         request.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
         request.fetchBatchSize = 100
 
-        let dataSource = DATASource(tableView: self.tableView, cellIdentifier: "Cell", fetchRequest: request, mainContext: self.fetcher.dataStack.mainContext, configuration: { cell, item, indexPath in
+        let dataSource = DATASource(tableView: self.tableView, cellIdentifier: "Cell", fetchRequest: request, mainContext: self.dataStack.mainContext, configuration: { cell, item, indexPath in
             cell.textLabel?.text = "\(item.valueForKey("firstName") as? String ?? "") \(item.valueForKey("lastName") as? String ?? "")"
         })
         
@@ -19,17 +23,20 @@ class RootController: BaseTableViewController {
 
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         self.tableView.dataSource = self.dataSource
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Cancel", style: .Done, target: self, action: #selector(cancelAction))
+
+        let users = try! JSON.from("huge-import.json") as! [[String : AnyObject]]
+        // let users = try! JSON.from("initial-import.json") as! [[String : AnyObject]]
+        self.operation = Sync(changes: users, inEntityNamed: "User", predicate: nil, dataStack: self.dataStack)
     }
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
-        print("appeared")
-//        self.fetcher.initialImport { error in
-//            print("first batch")
-//            self.fetcher.bigImport { error in
-//                print("second batch")
-//            }
-//        }
+        self.operation?.start()
+    }
+
+    func cancelAction() {
+        self.operation?.cancel()
     }
 }
