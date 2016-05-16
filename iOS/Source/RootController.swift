@@ -4,7 +4,13 @@ import JSON
 import Sync
 
 class RootController: BaseTableViewController {
-    var operation: Sync?
+    static let OperationCountKeyPath = "operationCount"
+    lazy var operationQueue: NSOperationQueue = {
+        let object = NSOperationQueue()
+        object.addObserver(self, forKeyPath: RootController.OperationCountKeyPath, options: .New, context: nil)
+
+        return object
+    }()
 
     lazy var dataSource: DATASource = {
         let request = NSFetchRequest(entityName: "User")
@@ -18,25 +24,54 @@ class RootController: BaseTableViewController {
         return dataSource
     }()
 
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView(activityIndicatorStyle: .White)
+        view.color = .blackColor()
+
+        return view
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         self.tableView.dataSource = self.dataSource
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Cancel", style: .Done, target: self, action: #selector(cancelAction))
-
-        let users = try! JSON.from("huge-import.json") as! [[String : AnyObject]]
-        // let users = try! JSON.from("initial-import.json") as! [[String : AnyObject]]
-        self.operation = Sync(changes: users, inEntityNamed: "User", predicate: nil, dataStack: self.dataStack)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: self.activityIndicator)
     }
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
-        self.operation?.start()
+        self.startAction()
+    }
+
+    func startAction() {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+            let users = try! JSON.from("huge-import.json") as! [[String : AnyObject]]
+            let operation = Sync(changes: users, inEntityNamed: "User", predicate: nil, dataStack: self.dataStack)
+            self.operationQueue.addOperation(operation)
+
+            dispatch_async(dispatch_get_main_queue()) {
+                self.activityIndicator.startAnimating()
+                self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(self.cancelAction))
+            }
+        }
     }
 
     func cancelAction() {
-        self.operation?.cancel()
+        self.activityIndicator.stopAnimating()
+        self.operationQueue.cancelAllOperations()
+    }
+
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        guard let object = object else { return }
+        if object.isEqual(self.operationQueue) && keyPath == RootController.OperationCountKeyPath {
+            if self.operationQueue.operationCount == 0 {
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.activityIndicator.stopAnimating()
+                    self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Refresh, target: self, action: #selector(self.startAction))
+                }
+            }
+        }
     }
 }
