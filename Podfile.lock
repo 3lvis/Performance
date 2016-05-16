@@ -22,16 +22,15 @@ PODS:
 DEPENDENCIES:
   - DATASource
   - JSON
-  - Sync (from `git@github.com:hyperoslo/Sync.git`, branch `cancellable-sync`)
+  - Sync (from `git@github.com:hyperoslo/Sync.git`)
 
 EXTERNAL SOURCES:
   Sync:
-    :branch: cancellable-sync
     :git: git@github.com:hyperoslo/Sync.git
 
 CHECKOUT OPTIONS:
   Sync:
-    :commit: 6a5196d5939fb5d75ba8b7717d1a61d93dea1417
+    :commit: 1ffbed7657a3c3bcce131e0eb16975887cc11f99
     :git: git@github.com:hyperoslo/Sync.git
 
 SPEC CHECKSUMS:
@@ -46,6 +45,6 @@ SPEC CHECKSUMS:
   NSString-HYPNetworking: 9794295fb2f632ecf33cde6e6311e77588e6f349
   Sync: bf459562cc7b0818b3e1279938b6cd82fa644ec9
 
-PODFILE CHECKSUM: a69038d8d0feee19ada96886c2b4d347a5d0b189
+PODFILE CHECKSUM: eacb64733433e0116ae4c5fe7214c6670b77f56a
 
 COCOAPODS: 1.0.0
