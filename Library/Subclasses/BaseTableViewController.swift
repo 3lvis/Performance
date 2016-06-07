@@ -2,7 +2,7 @@ import UIKit
 import DATAStack
 
 public class BaseTableViewController: UITableViewController {
-    internal var dataStack: DATAStack
+    var dataStack: DATAStack
 
     public init(dataStack: DATAStack) {
         self.dataStack = dataStack
