@@ -4,10 +4,8 @@
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" attributeType="String" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="friends" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="User" inverseName="parent" inverseEntity="User" syncable="YES"/>
-        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="friends" inverseEntity="User" syncable="YES"/>
     </entity>
     <elements>
-        <element name="User" positionX="-63" positionY="-18" width="128" height="118"/>
+        <element name="User" positionX="-63" positionY="-18" width="128" height="90"/>
     </elements>
 </model>

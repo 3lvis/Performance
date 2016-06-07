@@ -7,19 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14370A401D07059C00BAD45A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14370A3F1D07059C00BAD45A /* User.swift */; };
 		14425E5D1C97078A00F0FAD1 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14425E531C97078A00F0FAD1 /* BaseTableViewController.swift */; };
 		146E27A91BCD51F200959BBA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 146E279F1BCD51F200959BBA /* LaunchScreen.xib */; };
 		146E27AA1BCD51F200959BBA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 146E27A11BCD51F200959BBA /* Images.xcassets */; };
 		146E27AC1BCD51F200959BBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E27A41BCD51F200959BBA /* AppDelegate.swift */; };
 		146E27AD1BCD51F200959BBA /* RootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E27A51BCD51F200959BBA /* RootController.swift */; };
 		146E27AE1BCD51F200959BBA /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E27A61BCD51F200959BBA /* RootView.swift */; };
-		147D44821CE7BE6C00045A32 /* huge-import.json in Resources */ = {isa = PBXBuildFile; fileRef = 147D44801CE7BE6C00045A32 /* huge-import.json */; };
-		147D44841CE7BE6C00045A32 /* initial-import.json in Resources */ = {isa = PBXBuildFile; fileRef = 147D44811CE7BE6C00045A32 /* initial-import.json */; };
 		14CB87E61C96F94F007376A6 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 14CB87E41C96F94F007376A6 /* DataModel.xcdatamodeld */; };
 		709818D9ADABE6FA2DF5C395 /* Pods_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D988F0E661AC5B0F5E7B283D /* Pods_iOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		14370A3F1D07059C00BAD45A /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		14425E531C97078A00F0FAD1 /* BaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		146E27891BCD51C800959BBA /* iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		146E27A01BCD51F200959BBA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -28,8 +28,6 @@
 		146E27A41BCD51F200959BBA /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		146E27A51BCD51F200959BBA /* RootController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootController.swift; sourceTree = "<group>"; };
 		146E27A61BCD51F200959BBA /* RootView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
-		147D44801CE7BE6C00045A32 /* huge-import.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "huge-import.json"; sourceTree = "<group>"; };
-		147D44811CE7BE6C00045A32 /* initial-import.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "initial-import.json"; sourceTree = "<group>"; };
 		14CB87E51C96F94F007376A6 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		93E287699951EABDE55A5C2D /* Pods-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOS/Pods-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		D988F0E661AC5B0F5E7B283D /* Pods_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,8 +75,6 @@
 		146E279E1BCD51F200959BBA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				147D44801CE7BE6C00045A32 /* huge-import.json */,
-				147D44811CE7BE6C00045A32 /* initial-import.json */,
 				146E279F1BCD51F200959BBA /* LaunchScreen.xib */,
 				146E27A11BCD51F200959BBA /* Images.xcassets */,
 				146E27A21BCD51F200959BBA /* Info.plist */,
@@ -119,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				14CB87E41C96F94F007376A6 /* DataModel.xcdatamodeld */,
+				14370A3F1D07059C00BAD45A /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -205,9 +202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				146E27AA1BCD51F200959BBA /* Images.xcassets in Resources */,
-				147D44841CE7BE6C00045A32 /* initial-import.json in Resources */,
 				146E27A91BCD51F200959BBA /* LaunchScreen.xib in Resources */,
-				147D44821CE7BE6C00045A32 /* huge-import.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +290,7 @@
 			files = (
 				146E27AC1BCD51F200959BBA /* AppDelegate.swift in Sources */,
 				146E27AE1BCD51F200959BBA /* RootView.swift in Sources */,
+				14370A401D07059C00BAD45A /* User.swift in Sources */,
 				146E27AD1BCD51F200959BBA /* RootController.swift in Sources */,
 				14CB87E61C96F94F007376A6 /* DataModel.xcdatamodeld in Sources */,
 				14425E5D1C97078A00F0FAD1 /* BaseTableViewController.swift in Sources */,

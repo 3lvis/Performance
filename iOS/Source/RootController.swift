@@ -5,14 +5,6 @@ import Sync
 import DATAStack
 
 class RootController: BaseTableViewController {
-    static let OperationCountKeyPath = "operationCount"
-    lazy var operationQueue: NSOperationQueue = {
-        let object = NSOperationQueue()
-        object.addObserver(self, forKeyPath: RootController.OperationCountKeyPath, options: .New, context: nil)
-
-        return object
-    }()
-
     lazy var dataSource: DATASource = {
         let request = NSFetchRequest(entityName: "User")
         request.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
@@ -48,17 +40,27 @@ class RootController: BaseTableViewController {
 
     var backgroundContext: NSManagedObjectContext {
         let context = self.dataStack.newBackgroundContext()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(RootController.backgroundContextDidSave(_:)), name: NSManagedObjectContextDidSaveNotification, object: context)
         return context
     }
 
+    func backgroundContextDidSave(notification: NSNotification) throws {
+        self.dataStack.writerContext.mergeChangesFromContextDidSaveNotification(notification)
+    }
+
     func startAction() {
+        self.activityIndicator.startAnimating()
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(self.cancelAction))
+
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
-            let users = try! JSON.from("huge-import.json") as! [[String : AnyObject]]
+            let users = User.light()
             self.backgroundContext.performBlock {
                 Sync.changes(users, inEntityNamed: "User", predicate: nil, parent: nil, inContext: self.backgroundContext, dataStack: self.dataStack) { error in
                     dispatch_async(dispatch_get_main_queue()) {
-                        self.activityIndicator.startAnimating()
-                        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(self.cancelAction))
+                        self.dataSource.fetch()
+                        //self.tableView.reloadData()
+                        self.activityIndicator.stopAnimating()
+                        self.navigationItem.rightBarButtonItem = nil
                     }
                 }
             }
@@ -67,19 +69,6 @@ class RootController: BaseTableViewController {
 
     func cancelAction() {
         self.activityIndicator.stopAnimating()
-        self.operationQueue.cancelAllOperations()
-    }
-
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        guard let object = object else { return }
-        if object.isEqual(self.operationQueue) && keyPath == RootController.OperationCountKeyPath {
-            if self.operationQueue.operationCount == 0 {
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.activityIndicator.stopAnimating()
-                    self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Refresh, target: self, action: #selector(self.startAction))
-                }
-            }
-        }
     }
 
     override func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -90,5 +79,6 @@ class RootController: BaseTableViewController {
     override func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
         NSObject.cancelPreviousPerformRequestsWithTarget(self)
         self.dataSource.fetch()
+        self.tableView.reloadData()
     }
 }
