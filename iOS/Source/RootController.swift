@@ -2,6 +2,7 @@ import UIKit
 import DATASource
 import JSON
 import Sync
+import DATAStack
 
 class RootController: BaseTableViewController {
     static let OperationCountKeyPath = "operationCount"
@@ -45,15 +46,21 @@ class RootController: BaseTableViewController {
         self.startAction()
     }
 
+    var backgroundContext: NSManagedObjectContext {
+        let context = self.dataStack.newBackgroundContext()
+        return context
+    }
+
     func startAction() {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
             let users = try! JSON.from("huge-import.json") as! [[String : AnyObject]]
-            let operation = Sync(changes: users, inEntityNamed: "User", predicate: nil, dataStack: self.dataStack)
-            self.operationQueue.addOperation(operation)
-
-            dispatch_async(dispatch_get_main_queue()) {
-                self.activityIndicator.startAnimating()
-                self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(self.cancelAction))
+            self.backgroundContext.performBlock {
+                Sync.changes(users, inEntityNamed: "User", predicate: nil, parent: nil, inContext: self.backgroundContext, dataStack: self.dataStack) { error in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.activityIndicator.startAnimating()
+                        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(self.cancelAction))
+                    }
+                }
             }
         }
     }
