@@ -6,18 +6,18 @@ PODS:
   - DATAStack (5.2.1)
   - JSON (4.0.2)
   - NSDictionary-ANDYSafeValue (0.3.1)
-  - NSEntityDescription-SYNCPrimaryKey (1.1.1):
-    - NSString-HYPNetworking (~> 1.0.0)
-  - NSManagedObject-HYPPropertyMapper (3.6.5):
-    - NSEntityDescription-SYNCPrimaryKey (~> 1.1.1)
-    - NSString-HYPNetworking (~> 1.0.0)
-  - NSString-HYPNetworking (1.0.0)
-  - Sync (1.7.2):
+  - NSEntityDescription-SYNCPrimaryKey (1.2.3):
+    - NSString-HYPNetworking (~> 1.0.2)
+  - NSManagedObject-HYPPropertyMapper (3.6.9):
+    - NSEntityDescription-SYNCPrimaryKey (~> 1.2.3)
+    - NSString-HYPNetworking (~> 1.0.2)
+  - NSString-HYPNetworking (1.0.2)
+  - Sync (1.9.0):
     - DATAFilter (~> 0.10.0)
     - DATAStack (~> 5.2.1)
     - NSDictionary-ANDYSafeValue (~> 0.3.1)
-    - NSEntityDescription-SYNCPrimaryKey (~> 1.1.1)
-    - NSManagedObject-HYPPropertyMapper (~> 3.6.5)
+    - NSEntityDescription-SYNCPrimaryKey (~> 1.2.3)
+    - NSManagedObject-HYPPropertyMapper (~> 3.6.9)
 
 DEPENDENCIES:
   - DATASource
@@ -30,7 +30,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Sync:
-    :commit: 1ffbed7657a3c3bcce131e0eb16975887cc11f99
+    :commit: ca7d477099e02c89d3b354268b42de926c07f790
     :git: git@github.com:hyperoslo/Sync.git
 
 SPEC CHECKSUMS:
@@ -40,11 +40,11 @@ SPEC CHECKSUMS:
   DATAStack: c6432c89d0bd2b1d2a17c947ca8a2c81f389f06d
   JSON: d08f22c3e523be050d5d5f40bca43ec02d95b2cc
   NSDictionary-ANDYSafeValue: 2d7adf339b6e302d71fec5f1d71ae00aacda993e
-  NSEntityDescription-SYNCPrimaryKey: 50badad9cf3b44c538e137e363f3204725c8589c
-  NSManagedObject-HYPPropertyMapper: c496d7a45b95fa59871711bfd3fbe52546529b37
-  NSString-HYPNetworking: 9794295fb2f632ecf33cde6e6311e77588e6f349
-  Sync: bf459562cc7b0818b3e1279938b6cd82fa644ec9
+  NSEntityDescription-SYNCPrimaryKey: 9dbb89d7cbc1bea196dd935725bfcf3c0ff4249c
+  NSManagedObject-HYPPropertyMapper: 1a34418531715f01520eb32abcd2c183952ea630
+  NSString-HYPNetworking: 7c18e44ca9529d2f74a30a1c2a7a787da76198c1
+  Sync: f39edb4e3b931fdc387e836200c235a54750e072
 
 PODFILE CHECKSUM: eacb64733433e0116ae4c5fe7214c6670b77f56a
 
-COCOAPODS: 1.0.0
+COCOAPODS: 1.0.1
