@@ -81,4 +81,14 @@ class RootController: BaseTableViewController {
             }
         }
     }
+
+    override func scrollViewDidScroll(scrollView: UIScrollView) {
+        NSObject.cancelPreviousPerformRequestsWithTarget(self)
+        self.performSelector(#selector(scrollViewDidEndScrollingAnimation), withObject: nil, afterDelay: 0.3)
+    }
+
+    override func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
+        NSObject.cancelPreviousPerformRequestsWithTarget(self)
+        self.dataSource.fetch()
+    }
 }
