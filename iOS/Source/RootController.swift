@@ -58,7 +58,6 @@ class RootController: BaseTableViewController {
                 Sync.changes(users, inEntityNamed: "User", predicate: nil, parent: nil, inContext: self.backgroundContext, dataStack: self.dataStack) { error in
                     dispatch_async(dispatch_get_main_queue()) {
                         self.dataSource.fetch()
-                        //self.tableView.reloadData()
                         self.activityIndicator.stopAnimating()
                         self.navigationItem.rightBarButtonItem = nil
                     }
