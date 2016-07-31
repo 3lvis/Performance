@@ -22,9 +22,9 @@ class TableController: UITableViewController {
         request.sortDescriptors = [NSSortDescriptor(key: "createdDate", ascending: true)]
         request.fetchBatchSize = 100
 
-        let dataSource = DATASource(tableView: self.tableView, cellIdentifier: "Cell", fetchRequest: request, mainContext: self.dataStack.mainContext, configuration: { cell, item, indexPath in
+        let dataSource = DATASource(tableView: self.tableView, cellIdentifier: "Cell", fetchRequest: request, mainContext: self.dataStack.mainContext) { cell, item, indexPath in
             cell.textLabel?.text = "\(indexPath.row): \(item.valueForKey("title") as? String ?? ""))"
-        })
+        }
         
         return dataSource
     }()
@@ -60,18 +60,14 @@ class TableController: UITableViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.activityIndicator)
         self.activityIndicator.startAnimating()
 
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
-            self.backgroundContext.performBlock {
-                let users = User.light()
-                Sync.changes(users, inEntityNamed: "User", predicate: nil, parent: nil, inContext: self.backgroundContext, dataStack: self.dataStack, operations: [.Insert]) { error in
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.activityIndicator.stopAnimating()
-                        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(self.startAction))
-                        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(4 * Double(NSEC_PER_SEC)))
-                        dispatch_after(delayTime, dispatch_get_main_queue()) {
-                            self.startAction {}
-                        }
-                    }
+        self.backgroundContext.performBlock {
+            let users = User.light()
+            Sync.changes(users, inEntityNamed: "User", predicate: nil, parent: nil, inContext: self.backgroundContext, dataStack: self.dataStack, operations: [.Insert]) { error in
+                self.activityIndicator.stopAnimating()
+                self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(self.startAction))
+                let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(4 * Double(NSEC_PER_SEC)))
+                dispatch_after(delayTime, dispatch_get_main_queue()) {
+                    self.startAction {}
                 }
             }
         }
