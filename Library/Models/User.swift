@@ -3,7 +3,7 @@ import Foundation
 struct User {
     static func light() -> [[String : AnyObject]] {
         var users = [[String : AnyObject]]()
-        for _ in 0..<100 {
+        for _ in 0..<500 {
             users.append(self.generate())
         }
 
