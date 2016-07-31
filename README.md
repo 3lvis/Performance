@@ -1,6 +1,6 @@
 # Sync Performance
 
-Simple sample project to test Sync's performance of loading  62 700 items.
+Simple sample project to test Sync's performance of loading objects without blocking the main thread.
 
 ## Running the project
 
@@ -17,4 +17,3 @@ pod install
 ```
 
 - Open `Project.xcworkspace`
-
