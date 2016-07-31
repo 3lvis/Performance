@@ -5,7 +5,7 @@ import Sync
 import DATAStack
 
 class CollectionController: UICollectionViewController {
-    var dataStack: DATAStack
+    unowned var dataStack: DATAStack
 
     init(dataStack: DATAStack) {
         self.dataStack = dataStack

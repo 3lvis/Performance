@@ -5,7 +5,7 @@ import Sync
 import DATAStack
 
 class TableController: UITableViewController {
-    var dataStack: DATAStack
+    unowned var dataStack: DATAStack
 
     init(dataStack: DATAStack) {
         self.dataStack = dataStack
