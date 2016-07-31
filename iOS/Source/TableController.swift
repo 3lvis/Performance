@@ -40,7 +40,7 @@ class TableController: BaseTableViewController {
     }
 
     var backgroundContext: NSManagedObjectContext {
-        let context = self.dataStack.newBackgroundContext()
+        let context = self.dataStack.newNonMergingBackgroundContext()
 
         return context
     }
