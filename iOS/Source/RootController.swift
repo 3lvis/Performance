@@ -29,8 +29,9 @@ class RootController: BaseTableViewController {
 
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         self.tableView.dataSource = self.dataSource
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: self.activityIndicator)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(self.startAction))
     }
+
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -40,34 +41,24 @@ class RootController: BaseTableViewController {
 
     var backgroundContext: NSManagedObjectContext {
         let context = self.dataStack.newBackgroundContext()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(RootController.backgroundContextDidSave(_:)), name: NSManagedObjectContextDidSaveNotification, object: context)
         return context
     }
 
-    func backgroundContextDidSave(notification: NSNotification) throws {
-        self.dataStack.writerContext.mergeChangesFromContextDidSaveNotification(notification)
-    }
-
     func startAction() {
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.activityIndicator)
         self.activityIndicator.startAnimating()
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(self.cancelAction))
 
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
-            let users = User.light()
             self.backgroundContext.performBlock {
+                let users = User.light()
                 Sync.changes(users, inEntityNamed: "User", predicate: nil, parent: nil, inContext: self.backgroundContext, dataStack: self.dataStack) { error in
                     dispatch_async(dispatch_get_main_queue()) {
-                        self.dataSource.fetch()
                         self.activityIndicator.stopAnimating()
-                        self.navigationItem.rightBarButtonItem = nil
+                        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(self.startAction))
                     }
                 }
             }
         }
-    }
-
-    func cancelAction() {
-        self.activityIndicator.stopAnimating()
     }
 
     override func scrollViewDidScroll(scrollView: UIScrollView) {
