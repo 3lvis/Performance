@@ -12,8 +12,7 @@ struct User {
 
     static func generate() -> [String : AnyObject] {
         let id = NSUUID().UUIDString
-        let firstName = NSUUID().UUIDString
-        let lastName = NSUUID().UUIDString
+        let title = NSUUID().UUIDString
 
         let dateFormatter = NSDateFormatter()
         let enUSPosixLocale = NSLocale(localeIdentifier: "en_US_POSIX")
@@ -23,8 +22,7 @@ struct User {
 
         return [
             "id" : id,
-            "first_name": firstName,
-            "last_name": lastName,
+            "title": title,
             "createdDate": createdDate
         ]
     }

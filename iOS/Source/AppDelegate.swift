@@ -17,7 +17,7 @@ extension AppDelegate: UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         guard let window = self.window else { fatalError("Window not found") }
 
-        let rootController = TableController(dataStack: self.dataStack)
+        let rootController = CollectionController(dataStack: self.dataStack)
         let navigationController = UINavigationController(rootViewController: rootController)
         window.rootViewController = navigationController        
         window.makeKeyAndVisible()

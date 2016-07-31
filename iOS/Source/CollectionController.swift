@@ -4,13 +4,20 @@ import JSON
 import Sync
 import DATAStack
 
-class TableController: UITableViewController {
+class CollectionController: UICollectionViewController {
     var dataStack: DATAStack
 
     init(dataStack: DATAStack) {
         self.dataStack = dataStack
 
-        super.init(nibName: nil, bundle: nil)
+        let layout = UICollectionViewFlowLayout()
+        let bounds = UIScreen.mainScreen().bounds
+        let numberOfColumns = CGFloat(3)
+        let size = (bounds.width - (numberOfColumns - 1)) / numberOfColumns
+        layout.itemSize = CGSize(width: size, height: size)
+        layout.minimumLineSpacing = 1
+        layout.minimumInteritemSpacing = 1
+        super.init(collectionViewLayout: layout)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -22,8 +29,10 @@ class TableController: UITableViewController {
         request.sortDescriptors = [NSSortDescriptor(key: "createdDate", ascending: true)]
         request.fetchBatchSize = 100
 
-        let dataSource = DATASource(tableView: self.tableView, cellIdentifier: "Cell", fetchRequest: request, mainContext: self.dataStack.mainContext, configuration: { cell, item, indexPath in
-            cell.textLabel?.text = "\(indexPath.row): \(item.valueForKey("title") as? String ?? ""))"
+        let dataSource = DATASource(collectionView: self.collectionView!, cellIdentifier: "Cell", fetchRequest: request, mainContext: self.dataStack.mainContext, configuration: { cell, item, indexPath in
+            let cell = cell as! CollectionCell
+            cell.textLabel.text = "\(indexPath.row): \(item.valueForKey("title") as? String ?? "")"
+            print(cell.textLabel.text)
         })
         
         return dataSource
@@ -39,8 +48,8 @@ class TableController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-        self.tableView.dataSource = self.dataSource
+        self.collectionView?.registerClass(CollectionCell.self, forCellWithReuseIdentifier: "Cell")
+        self.collectionView?.dataSource = self.dataSource
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(self.startAction))
     }
 
@@ -85,6 +94,6 @@ class TableController: UITableViewController {
     override func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
         NSObject.cancelPreviousPerformRequestsWithTarget(self)
         self.dataSource.fetch()
-        self.tableView.reloadData()
+        self.collectionView?.reloadData()
     }
 }
