@@ -3,7 +3,7 @@ PODS:
     - DATAObjectIDs (~> 0.5.1)
   - DATAObjectIDs (0.5.1)
   - DATASource (5.9.0)
-  - DATAStack (5.3.0)
+  - DATAStack (5.4.0)
   - JSON (4.0.2)
   - NSDictionary-ANDYSafeValue (0.3.1)
   - NSEntityDescription-SYNCPrimaryKey (1.2.3):
@@ -12,9 +12,9 @@ PODS:
     - NSEntityDescription-SYNCPrimaryKey (~> 1.2.3)
     - NSString-HYPNetworking (~> 1.0.2)
   - NSString-HYPNetworking (1.0.2)
-  - Sync (1.10.1):
+  - Sync (1.10.2):
     - DATAFilter (~> 0.11.0)
-    - DATAStack (~> 5.3.0)
+    - DATAStack (~> 5.4.0)
     - NSDictionary-ANDYSafeValue (~> 0.3.1)
     - NSEntityDescription-SYNCPrimaryKey (~> 1.2.3)
     - NSManagedObject-HYPPropertyMapper (~> 3.6.9)
@@ -30,20 +30,20 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Sync:
-    :commit: 4f05d9c4e7e4392002302f6cb482d9ae56b4a9de
+    :commit: 9f27bcce35a03673ae368e0382957cecbdec4130
     :git: git@github.com:hyperoslo/Sync.git
 
 SPEC CHECKSUMS:
   DATAFilter: f875a2421228cebd0230c90148a40551c3c02395
   DATAObjectIDs: 33db74dd1c858c2d22a45a4013c95f1082182e4e
   DATASource: cc307d584cd470cea92d316d55bb2a0df4d85dc6
-  DATAStack: fa488c2272116c00b3f4c115aa244d769997003d
+  DATAStack: 86ad143ae4e3f094deeb546109bc67f441823909
   JSON: d08f22c3e523be050d5d5f40bca43ec02d95b2cc
   NSDictionary-ANDYSafeValue: 2d7adf339b6e302d71fec5f1d71ae00aacda993e
   NSEntityDescription-SYNCPrimaryKey: 9dbb89d7cbc1bea196dd935725bfcf3c0ff4249c
   NSManagedObject-HYPPropertyMapper: 1a34418531715f01520eb32abcd2c183952ea630
   NSString-HYPNetworking: 7c18e44ca9529d2f74a30a1c2a7a787da76198c1
-  Sync: a968f655554b2a31de6c57435af09ddffacf4d7c
+  Sync: 79a8842727353961a7fb162b859a8c154cf265ed
 
 PODFILE CHECKSUM: eacb64733433e0116ae4c5fe7214c6670b77f56a
 

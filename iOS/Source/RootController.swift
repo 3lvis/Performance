@@ -7,11 +7,11 @@ import DATAStack
 class RootController: BaseTableViewController {
     lazy var dataSource: DATASource = {
         let request = NSFetchRequest(entityName: "User")
-        request.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor(key: "createdDate", ascending: true)]
         request.fetchBatchSize = 100
 
         let dataSource = DATASource(tableView: self.tableView, cellIdentifier: "Cell", fetchRequest: request, mainContext: self.dataStack.mainContext, configuration: { cell, item, indexPath in
-            cell.textLabel?.text = "\(item.valueForKey("firstName") as? String ?? "") \(item.valueForKey("lastName") as? String ?? "")"
+            cell.textLabel?.text = "\(indexPath.row): \(item.valueForKey("firstName") as? String ?? "") \(item.valueForKey("lastName") as? String ?? "")"
         })
         
         return dataSource
@@ -36,25 +36,30 @@ class RootController: BaseTableViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
-        self.startAction()
+        self.startAction {}
     }
 
     var backgroundContext: NSManagedObjectContext {
         let context = self.dataStack.newBackgroundContext()
+
         return context
     }
 
-    func startAction() {
+    func startAction(completion: (Void -> Void)) {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.activityIndicator)
         self.activityIndicator.startAnimating()
 
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
             self.backgroundContext.performBlock {
                 let users = User.light()
-                Sync.changes(users, inEntityNamed: "User", predicate: nil, parent: nil, inContext: self.backgroundContext, dataStack: self.dataStack) { error in
+                Sync.changes(users, inEntityNamed: "User", predicate: nil, parent: nil, inContext: self.backgroundContext, dataStack: self.dataStack, operations: [.Insert]) { error in
                     dispatch_async(dispatch_get_main_queue()) {
                         self.activityIndicator.stopAnimating()
                         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(self.startAction))
+                        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(4 * Double(NSEC_PER_SEC)))
+                        dispatch_after(delayTime, dispatch_get_main_queue()) {
+                            self.startAction {}
+                        }
                     }
                 }
             }
