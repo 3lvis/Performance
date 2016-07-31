@@ -4,7 +4,7 @@ import JSON
 import Sync
 import DATAStack
 
-class TableViewController: BaseTableViewController {
+class TableController: BaseTableViewController {
     lazy var dataSource: DATASource = {
         let request = NSFetchRequest(entityName: "User")
         request.sortDescriptors = [NSSortDescriptor(key: "createdDate", ascending: true)]
