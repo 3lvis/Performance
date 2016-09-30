@@ -1,6 +1,6 @@
 # Sync Performance
 
-Simple sample project to test Sync's performance of loading objects without blocking the main thread.
+Shows Sync's performance of loading objects without blocking the main thread.
 
 ## Running the project
 
