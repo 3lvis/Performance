@@ -18,20 +18,21 @@ class TableController: UITableViewController {
     }
 
     lazy var dataSource: DATASource = {
-        let request = NSFetchRequest(entityName: "User")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
         request.sortDescriptors = [NSSortDescriptor(key: "createdDate", ascending: true)]
         request.fetchBatchSize = 100
-
-        let dataSource = DATASource(tableView: self.tableView, cellIdentifier: "Cell", fetchRequest: request, mainContext: self.dataStack.mainContext) { cell, item, indexPath in
-            cell.textLabel?.text = "\(indexPath.row): \(item.valueForKey("title") as? String ?? ""))"
-        }
+        
+        let dataSource = DATASource(tableView: self.tableView, cellIdentifier: "Cell", fetchRequest: request, mainContext: self.dataStack.mainContext, configuration: { cell, item, indexPath in
+            let title = item.value(forKey: "title") as? String ?? ""
+            cell.textLabel?.text = "\(indexPath.row): \(title)"
+        })
         
         return dataSource
     }()
 
     lazy var activityIndicator: UIActivityIndicatorView = {
-        let view = UIActivityIndicatorView(activityIndicatorStyle: .White)
-        view.color = .blackColor()
+        let view = UIActivityIndicatorView(activityIndicatorStyle: .white)
+        view.color = .black
 
         return view
     }()
@@ -39,15 +40,15 @@ class TableController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         self.tableView.dataSource = self.dataSource
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(self.startAction))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.startAction))
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        self.startAction {}
+        self.startAction()
     }
 
     var backgroundContext: NSManagedObjectContext {
@@ -56,30 +57,30 @@ class TableController: UITableViewController {
         return context
     }
 
-    func startAction(completion: (Void -> Void)) {
+    func startAction() {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.activityIndicator)
         self.activityIndicator.startAnimating()
 
-        self.backgroundContext.performBlock {
+        self.backgroundContext.perform {
             let users = User.light()
-            Sync.changes(users, inEntityNamed: "User", predicate: nil, parent: nil, inContext: self.backgroundContext, dataStack: self.dataStack, operations: [.Insert]) { error in
+            Sync.changes(users, inEntityNamed: "User", predicate: nil, parent: nil, parentRelationship: nil, inContext: self.backgroundContext, dataStack: self.dataStack, operations: .Insert)
+            { error in
                 self.activityIndicator.stopAnimating()
-                self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(self.startAction))
-                let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(4 * Double(NSEC_PER_SEC)))
-                dispatch_after(delayTime, dispatch_get_main_queue()) {
-                    self.startAction {}
+                self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.startAction))
+                DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
+                    self.startAction()
                 }
             }
         }
     }
 
-    override func scrollViewDidScroll(scrollView: UIScrollView) {
-        NSObject.cancelPreviousPerformRequestsWithTarget(self)
-        self.performSelector(#selector(scrollViewDidEndScrollingAnimation), withObject: nil, afterDelay: 0.3)
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        NSObject.cancelPreviousPerformRequests(withTarget: self)
+        self.perform(#selector(scrollViewDidEndScrollingAnimation), with: nil, afterDelay: 0.3)
     }
 
-    override func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
-        NSObject.cancelPreviousPerformRequestsWithTarget(self)
+    override func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        NSObject.cancelPreviousPerformRequests(withTarget: self)
         self.dataSource.fetch()
         self.tableView.reloadData()
     }
