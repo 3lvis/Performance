@@ -1,8 +1,8 @@
 import Foundation
 
 struct User {
-    static func light() -> [[String : AnyObject]] {
-        var users = [[String : AnyObject]]()
+    static func light() -> [[String : Any]] {
+        var users = [[String : Any]]()
         for _ in 0..<500 {
             users.append(self.generate())
         }
@@ -10,15 +10,15 @@ struct User {
         return users
     }
 
-    static func generate() -> [String : AnyObject] {
-        let id = NSUUID().UUIDString
-        let title = NSUUID().UUIDString
+    static func generate() -> [String : Any] {
+        let id = UUID().uuidString
+        let title = UUID().uuidString
 
-        let dateFormatter = NSDateFormatter()
-        let enUSPosixLocale = NSLocale(localeIdentifier: "en_US_POSIX")
+        let dateFormatter = DateFormatter()
+        let enUSPosixLocale = Locale(identifier: "en_US_POSIX")
         dateFormatter.locale = enUSPosixLocale
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
-        let createdDate = dateFormatter.stringFromDate(NSDate())
+        let createdDate = dateFormatter.string(from: Date())
 
         return [
             "id" : id,
