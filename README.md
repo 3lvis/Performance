@@ -1,6 +1,6 @@
 # Sync Performance
 
-Shows Sync's performance of loading objects without blocking the main thread.
+Shows Sync's performance of loading tens of thousands objects without blocking the main thread.
 
 ## Running the project
 
