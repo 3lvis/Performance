@@ -1,11 +1,11 @@
 PODS:
-  - DATASource (6.0.2)
-  - DATAStack (6.0.1)
+  - DATASource (6.1.1)
+  - DATAStack (6.1.0)
   - JSON (5.0.0)
-  - NSManagedObject-HYPPropertyMapper (4.1.4)
-  - Sync (2.2.0):
-    - DATAStack (~> 6.0.1)
-    - NSManagedObject-HYPPropertyMapper (~> 4.1.4)
+  - Sync (2.3.1):
+    - DATAStack (~> 6.1.0)
+    - SYNCPropertyMapper (~> 5.0.1)
+  - SYNCPropertyMapper (5.0.1)
 
 DEPENDENCIES:
   - DATASource
@@ -13,11 +13,11 @@ DEPENDENCIES:
   - Sync
 
 SPEC CHECKSUMS:
-  DATASource: 18373efb2a4d8c35c12e5e8bce3f9d01b22ea7b5
-  DATAStack: 4138a30db76d535d04f9130847ac59748c6c16aa
+  DATASource: fa895931841523f62c1378cbc53ef2de87e5cf30
+  DATAStack: 753e2b009ddb8918c6329919f09c1f9d2bcd7cc2
   JSON: 93622160a062588b4cd3497b77ccd777f1fd0587
-  NSManagedObject-HYPPropertyMapper: 0502d7a0dcb8c0c8112757b80e6318a1baf9c486
-  Sync: 3be1ae6ae93685770d56b437a224e859989a14d6
+  Sync: 6926aaf4fda1ae751591a54cff3c2d778bd821bc
+  SYNCPropertyMapper: 316eeeeaad170a7407a82b15989852fcbf1f6573
 
 PODFILE CHECKSUM: c6893face001d91e617ddd12021286a2fe16752e
 
