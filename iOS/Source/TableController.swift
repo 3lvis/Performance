@@ -2,12 +2,11 @@ import UIKit
 import DATASource
 import JSON
 import Sync
-import DATAStack
 
 class TableController: UITableViewController {
-    unowned var dataStack: DATAStack
+    unowned var dataStack: DataStack
 
-    init(dataStack: DATAStack) {
+    init(dataStack: DataStack) {
         self.dataStack = dataStack
 
         super.init(nibName: nil, bundle: nil)
@@ -57,13 +56,13 @@ class TableController: UITableViewController {
         return context
     }
 
-    func startAction() {
+    @objc func startAction() {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.activityIndicator)
         self.activityIndicator.startAnimating()
 
         self.backgroundContext.perform {
             let users = User.light()
-            Sync.changes(users, inEntityNamed: "User", predicate: nil, parent: nil, parentRelationship: nil, inContext: self.backgroundContext, dataStack: self.dataStack, operations: .Insert)
+            Sync.changes(users, inEntityNamed: "User", predicate: nil, parent: nil, parentRelationship: nil, inContext: self.backgroundContext, operations: .insert)
             { error in
                 self.activityIndicator.stopAnimating()
                 self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.startAction))

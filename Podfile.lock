@@ -1,24 +1,24 @@
 PODS:
-  - DATASource (6.1.1)
-  - DATAStack (6.1.0)
+  - DATASource (7.0.2)
   - JSON (5.0.0)
-  - Sync (2.3.1):
-    - DATAStack (~> 6.1.0)
-    - SYNCPropertyMapper (~> 5.0.1)
-  - SYNCPropertyMapper (5.0.1)
+  - Sync (4.1.3)
 
 DEPENDENCIES:
   - DATASource
   - JSON
   - Sync
 
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - DATASource
+    - JSON
+    - Sync
+
 SPEC CHECKSUMS:
-  DATASource: fa895931841523f62c1378cbc53ef2de87e5cf30
-  DATAStack: 753e2b009ddb8918c6329919f09c1f9d2bcd7cc2
+  DATASource: b86db74542b5b27d4d2af43ae698022f19507379
   JSON: 93622160a062588b4cd3497b77ccd777f1fd0587
-  Sync: 6926aaf4fda1ae751591a54cff3c2d778bd821bc
-  SYNCPropertyMapper: 316eeeeaad170a7407a82b15989852fcbf1f6573
+  Sync: 3cd2b84622c964220d7c7ba6e29823e096f1c1cf
 
 PODFILE CHECKSUM: c6893face001d91e617ddd12021286a2fe16752e
 
-COCOAPODS: 1.1.0.rc.2
+COCOAPODS: 1.5.0

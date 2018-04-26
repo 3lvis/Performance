@@ -1,12 +1,12 @@
 import UIKit
-import DATAStack
+import Sync
 
 @UIApplicationMain
 class AppDelegate: UIResponder {
     var window: UIWindow?
 
-    lazy var dataStack: DATAStack = {
-        let dataStack = DATAStack(modelName: "DataModel")
+    lazy var dataStack: DataStack = {
+        let dataStack = DataStack(modelName: "DataModel")
 
         return dataStack
     }()
