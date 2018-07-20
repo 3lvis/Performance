@@ -6,16 +6,10 @@ The core idea is to use DATAStack's nonMergingContext. Since it doesn't merge th
 
 ## Running the project
 
-- Install the [cocoapods](https://cocoapods.org) gem
+- Clone the project 
 
 ```
-sudo gem install cocoapods
-```
-
-- Run the following command in Terminal.app
-
-```
-pod install
+git@github.com:3lvis/Performance.git
 ```
 
 - Open `Project.xcworkspace`
